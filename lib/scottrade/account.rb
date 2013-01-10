@@ -1,4 +1,3 @@
-require 'money'
 
 module Scottrade
   
@@ -6,18 +5,18 @@ module Scottrade
     CASH_ACCOUNT = "Cash"
     MARGIN_ACCOUNT = "Margin"
     SHORT_ACCOUNT = "Short"
-    attr_reader :type, :settledFunds, :marketValue, :yesterdayMarketValue, :totalAvailableForTrading, :depositedFunds, :totalValue
+    attr_reader :type, :settled_funds, :market_value, :yesterday_market_value, :total_available_for_trading, :deposited_funds, :total_value
     
     def initialize(details={})
       @type = details["AccountType"]
-      @settledFunds = Money.parse details["SettledFunds"]
-      @marketValue = Money.parse details["MarketValue"]
-      @yesterdayMarketValue = Money.parse details["YesterdayMarketValue"]
+      @settled_funds = Money.parse details["SettledFunds"]
+      @market_value = Money.parse details["MarketValue"]
+      @yesterday_market_value = Money.parse details["YesterdayMarketValue"]
       
-      @totalAvailableForTrading = Money.parse details["TotalAccountTypeFundsForTrading"]
-      @depositedFunds = Money.parse details["BankDepositProgramForTrading"]
+      @total_available_for_trading = Money.parse details["TotalAccountTypeFundsForTrading"]
+      @deposited_funds = Money.parse details["BankDepositProgramForTrading"]
       
-      @totalValue = Money.parse details["TotalAccountTypeValue"]
+      @total_value = Money.parse details["TotalAccountTypeValue"]
     end
     
     def cash?

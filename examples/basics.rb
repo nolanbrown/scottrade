@@ -2,7 +2,6 @@
 lib = File.expand_path('../../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-
 require 'scottrade'
 
 scottrade = Scottrade::Scottrade.new(ENV["SCOTTRADE_ACCOUNT"],ENV["SCOTTRADE_PASSWORD"])
@@ -22,6 +21,10 @@ rescue StandardError => e
   exit 1
 end
 
+puts scottrade.brokerage.account_balance
+##
+# The code below will output all available variables for all associated classes
+##
 
 scottrade.brokerage.instance_variables.each{|variable|
   print "#{variable} : "; $stdout.flush

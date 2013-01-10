@@ -30,8 +30,14 @@ Basic usage is:
 	scottrade.brokerage.update_accounts
 	scottrade.brokerage.update_positions
 	
-	puts scottrade.brokerage.accountBalance
-	
+	print scottrade.brokerage.account_balance
+
+NOTE: Many variables will return a `Money` object, not a `String`
+
+## To Do
+
+- Add additional test coverage
+- Add ability to check quotes
 
 
 ## Contributing

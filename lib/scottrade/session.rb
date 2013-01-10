@@ -6,7 +6,7 @@ require_relative 'error'
 module Scottrade
   class Session < Base
     
-    attr_reader :encryptedId, :maskId
+    attr_reader :encrypted_id, :mask_id
     
     def initialize(account, password)
       @account = account
@@ -46,8 +46,8 @@ module Scottrade
             cookies.push(cookie.split('; ')[0])
         }
         @cookies = cookies
-        @encryptedId = parsed_response["encryptedId"]
-        @maskId = parsed_response["maskId"]
+        @encrypted_dd = parsed_response["encryptedId"]
+        @mask_id = parsed_response["maskId"]
         
         return self
       elsif parsed_response["msg"]
