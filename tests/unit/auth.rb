@@ -1,6 +1,6 @@
 require 'test/unit'
 require 'rack/test'
-require '../../lib/scottrade'
+require_relative '../../lib/scottrade'
 
 class AuthenticationTest < Test::Unit::TestCase
   include Rack::Test::Methods
