@@ -2,9 +2,11 @@ require 'json'
 
 require_relative 'base'
 require_relative 'error'
+require_relative 'helpers'
 
 module Scottrade
   class Session < Base
+    include Scottrade::Helpers
     
     attr_reader :encrypted_id, :mask_id
     
@@ -17,20 +19,11 @@ module Scottrade
       return (@cookies != nil)
     end
     def authenticate
-      params = {}
-      params["appID"] = "Scottrade"
+      params = request_parameters("VerifyLogin")
       params["appName"] = "ScottradeMobileApplication"
-      params["rcid"] = "iPhone"
-      params["osName"] = "iPhone"
-      params["platform"] = "iPhone"
-      params["cacheid"] = ""
-      params["osVer"] = "6"
-      params["appver"] = "1.1.4"
       params["appVer"] = "1.1.4"
       params["isRemAcc"] = "true"
       params["page"] = "LogIn"
-      params["serviceID"] = "VerifyLogin"
-      params["channel"] = "rc"
       params["langId"] = "English"      
       
       params["acc"] = @account

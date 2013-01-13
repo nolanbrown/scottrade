@@ -1,9 +1,11 @@
 require 'money'
 require_relative 'account'
 require_relative 'position'
+require_relative 'helpers'
 
 module Scottrade
   class Brokerage 
+    include Scottrade::Helpers
     
     attr_reader :total_value, :total_cash_balance, :yesterday_total_cash_balance, :available_free_cash_blanace, :account_balance
     attr_reader :total_market_value_with_options, :total_market_value_without_options, :yesterday_total_market_value
@@ -23,16 +25,7 @@ module Scottrade
     # end
     
     def update_accounts
-      params = {}
-      params["channel"] = "rc"
-      params["appID"] = "Scottrade"
-      params["rcid"] = "iPhone"
-      params["cacheid"] = ""
-      params["platform"] = "iPhone"
-      params["appver"] = "1.1.4"
-      params["useCachedData"] = "false"
-            
-      params["serviceID"] = "GetFrontEndMoneyBalances"
+      params = request_parameters("GetFrontEndMoneyBalances")
             
       response = @session.post(params)
       parsed_response = JSON.parse(response.body)
@@ -68,15 +61,7 @@ module Scottrade
     end
     
     def update_positions
-      params = {}
-      params["channel"] = "rc"
-      params["appID"] = "Scottrade"
-      params["rcid"] = "iPhone"
-      params["cacheid"] = ""
-      params["platform"] = "iPhone"
-      params["appver"] = "1.1.4"
-      
-      params["useCachedData"] = "false"
+      params = request_parameters("GetPositions_v2")
       params["startRow"] = "0"
       params["noOfRows"] = "1000"
       params["returnRealTimeMktValue"] = "true"
@@ -102,6 +87,7 @@ module Scottrade
       else
         raise RequestError
       end
-    end
+    end    
+    
   end
 end
