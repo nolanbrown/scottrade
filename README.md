@@ -4,6 +4,7 @@ Very basic gem for accessing Scottrade account information including balances an
 
 **This software comes with no warranty and you use it at your own risk.**
 
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/nolanbrown/scottrade)
 
 ## Installation
 
