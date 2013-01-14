@@ -92,10 +92,15 @@ module Scottrade
     def set_variables_from_response(response)
       response.each{|key,value|
         settings = KEYS_TO_VARIABLES[key]
-        if settings[:is_money]
-          value = Money.parse value
+        if settings
+          if settings[:is_money]
+            begin
+            value = Money.parse value
+            rescue
+            end
+          end
+          instance_variable_set("@#{settings[:key].to_s}", value)
         end
-        instance_variable_set("@#{settings[:key].to_s}", value)
       }
     end
   end

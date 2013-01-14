@@ -12,14 +12,14 @@ rescue StandardError => e
   exit 1
 end
 
-begin
+#begin
   scottrade.brokerage.update_accounts
   scottrade.brokerage.update_positions
   
-rescue StandardError => e
-  puts e
-  exit 1
-end
+# rescue StandardError => e
+#   puts e
+#   exit 1
+# end
 
 puts scottrade.brokerage.account_balance
 ##

@@ -31,6 +31,8 @@ module Scottrade
       params["isEncrypted"] = "false"
             
       response = authentication_post(params)
+      all_cookies = response.get_fields('set-cookie') # only cookies are set on valid credentials
+      parsed_response = JSON.parse(response.body)
       
       @cookies = []
       all_cookies.each { | cookie |
@@ -45,10 +47,9 @@ module Scottrade
     private
     def authentication_post(params)
       response = post(params)
-      all_cookies = response.get_fields('set-cookie') # only cookies are set on valid credentials
       parsed_response = JSON.parse(response.body)
       if parsed_response["error"] == "false" and !parsed_response.has_key?("errmsg")
-        return parsed_response
+        return response
       elsif parsed_response["msg"]
         raise AuthenticationError, parsed_response["msg"]
       elsif parsed_response["errmsg"]
